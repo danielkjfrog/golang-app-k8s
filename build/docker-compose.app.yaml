@@ -1,0 +1,12 @@
+version: "3"
+services:
+  backend:
+    image: danielkeler-docker.jfrog.io/automation/backend:1.0.0
+    environment:
+      - SERVER_PORT=9090
+    ports:
+      - "9090:9090"
+  redis:
+    image: k8s.gcr.io/redis:e2e
+    ports:
+      - "6379:6379"

@@ -1,0 +1,6 @@
+image:
+  repository: k8s.gcr.io/redis
+  tag: "e2e"
+replicaCount: 3
+service:
+  containerPort: 6379

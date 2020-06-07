@@ -1,0 +1,8 @@
+image:
+  repository: danielkeler-docker.jfrog.io/automation/backend
+  tag: "1.0.1"
+replicaCount: 3
+service:
+  type: NodePort
+  port: 80
+  containerPort: 9090

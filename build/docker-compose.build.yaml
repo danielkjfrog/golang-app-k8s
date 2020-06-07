@@ -1,0 +1,7 @@
+version: "3"
+services:
+  backend:
+    build:
+      context: ..
+      dockerfile: build/Dockerfile
+    image: danielkeler-docker.jfrog.io/automation/backend:1.0.1

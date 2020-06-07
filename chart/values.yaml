@@ -1,0 +1,10 @@
+namespace:
+  name: app-namespace
+
+backend:
+  namespace:
+    name: app-namespace
+
+redis:
+  namespace:
+    name: app-namespace

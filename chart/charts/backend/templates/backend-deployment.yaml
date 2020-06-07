@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-{{ .Chart.Name }}
+  namespace: {{ .Values.namespace.name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-{{ .Chart.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-{{ .Chart.Name }}
+    spec:
+      containers:
+        - name: {{ .Release.Name }}-{{ .Chart.Name }}
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: Always
+          env:
+            - name: REDIS_HOST
+              value: redis-master
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.containerPort }}
+          livenessProbe:
+            httpGet:
+              path: /api/v1/system/ping
+              port: {{ .Values.service.containerPort }}
+              scheme: HTTP
+            initialDelaySeconds: 2
+            periodSeconds: 15
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /api/v1/system/readiness
+              port: {{ .Values.service.containerPort }}
+              scheme: HTTP
+            initialDelaySeconds: 2
+            timeoutSeconds: 1
